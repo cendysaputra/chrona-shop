@@ -34,14 +34,14 @@ export default function Products() {
 
       <div className={s.toolbar}>
         <div className={s.chips} role="group" aria-label="Filter by series">
-          <button type="button" className={`${s.chip} ${!series ? s["chip-active"] : ""}`} aria-pressed={!series} onClick={() => setParam("series", "")}>
+          <button type="button" className={`pill-sweep ${s.chip} ${!series ? s["chip-active"] : ""}`} aria-pressed={!series} onClick={() => setParam("series", "")}>
             All
           </button>
           {SERIES.map((name) => (
             <button
               key={name}
               type="button"
-              className={`${s.chip} ${series === name ? s["chip-active"] : ""}`}
+              className={`pill-sweep ${s.chip} ${series === name ? s["chip-active"] : ""}`}
               aria-pressed={series === name}
               onClick={() => setParam("series", name)}
             >

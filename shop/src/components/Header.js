@@ -18,14 +18,14 @@ export default function Header() {
   const navClass = ({ isActive }) => `${s["nav-link"]} ${isActive ? s.active : ""}`;
 
   return (
-    <header className={`${s.header} ${pathname === "/" ? s["home-header"] : ""}`}>
+    <header className={`${s.header} ${pathname === "/home" ? s["home-header"] : ""}`}>
       <div className={`container ${s.inner}`}>
         <nav id="main-nav" className={`${s.nav} ${open ? s.open : ""}`} aria-label="Main">
-          <NavLink to="/" end className={navClass}>
+          <NavLink to="/home" end className={navClass}>
             Home
           </NavLink>
-          <NavLink to="/products" className={navClass}>
-            {pathname === "/" ? "Product" : "Shop"}
+          <NavLink to="/shop" className={navClass}>
+            Shop
           </NavLink>
           {user && (
             <button type="button" className={`${s["nav-link"]} ${s["mobile-only"]}`} onClick={logout}>

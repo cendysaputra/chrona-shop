@@ -71,7 +71,7 @@ export default function Checkout() {
           Thank you, {order.name.split(" ")[0]}. Your order of <span className="mono">{formatPrice(order.total)}</span> has been placed and
           will be shipped to {order.city}.
         </p>
-        <Link to="/products" className="btn btn-primary">
+        <Link to="/shop" className="btn btn-primary">
           Continue shopping
         </Link>
       </div>
@@ -84,7 +84,7 @@ export default function Checkout() {
         <p className="eyebrow">Checkout</p>
         <h1 className="section-title">Nothing to check out.</h1>
         <p className="lead">Your cart is empty. Add a watch first.</p>
-        <Link to="/products" className="btn btn-primary">
+        <Link to="/shop" className="btn btn-primary">
           Shop watches
         </Link>
       </div>

@@ -116,13 +116,13 @@ function FeatureTile({ product, label, dark = false }) {
         <h3>Chrona {product.series}</h3>
         <p className={s["tile-price"]}>{formatPrice(product.price)}</p>
         <div className={s["tile-actions"]}>
-          <Link to={`/products/${product.slug}`} className="text-link">Learn more</Link>
-          <button type="button" onClick={handleAdd} disabled={product.stock <= 0}>
+          <Link to={`/shop/${product.slug}`} className="text-link">Learn more</Link>
+          <button type="button" className="pill-sweep" onClick={handleAdd} disabled={product.stock <= 0}>
             {product.stock <= 0 ? "Sold out" : added ? "Added" : "Add to cart"}
           </button>
         </div>
       </div>
-      <Link to={`/products/${product.slug}`} className={s["tile-image"]} tabIndex={-1} aria-hidden="true">
+      <Link to={`/shop/${product.slug}`} className={s["tile-image"]} tabIndex={-1} aria-hidden="true">
         <ProductImage src={product.image} alt="" />
       </Link>
     </article>
@@ -136,7 +136,7 @@ function Collection() {
     <section className={`container ${s.collection}`} aria-labelledby="collection-title">
       <div className={s["collection-head"]}>
         <h2 id="collection-title" className={s["section-title"]}>Shop the collection</h2>
-        <Link to="/products" className={s["shop-link"]}>Shop now</Link>
+        <Link to="/shop" className={`${s["shop-link"]} pill-sweep`}>Shop now</Link>
       </div>
       {loading && <Status>Loading watches…</Status>}
       {error && <Status tone="error">{getErrorMessage(error)}</Status>}
@@ -166,10 +166,10 @@ function HomeProductCard({ product }) {
 
   return (
     <article className={s["product-card"]}>
-      <Link to={`/products/${product.slug}`} className={s["product-image"]} aria-label={product.name}>
+      <Link to={`/shop/${product.slug}`} className={s["product-image"]} aria-label={product.name}>
         <ProductImage src={product.image} alt="" />
       </Link>
-      <h3><Link to={`/products/${product.slug}`}>{product.name}</Link></h3>
+      <h3><Link to={`/shop/${product.slug}`}>{product.name}</Link></h3>
       <p className={s["product-tagline"]}>{product.tagline}</p>
       <div className={s["product-bottom"]}>
         <span>{formatPrice(product.price)}</span>

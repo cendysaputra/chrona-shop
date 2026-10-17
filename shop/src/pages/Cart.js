@@ -17,7 +17,7 @@ export default function Cart() {
         <p className="eyebrow">Cart</p>
         <h1 className="section-title">Your cart is empty.</h1>
         <p className="lead">Find a watch you like and it will show up here.</p>
-        <Link to="/products" className="btn btn-primary">
+        <Link to="/shop" className="btn btn-primary">
           Shop watches
         </Link>
       </div>
@@ -38,14 +38,14 @@ export default function Cart() {
         <ul className={s.list}>
           {items.map((item) => (
             <li key={item.slug} className={s.item}>
-              <Link to={`/products/${item.slug}`} className={s.thumb} tabIndex={-1} aria-hidden="true">
+              <Link to={`/shop/${item.slug}`} className={s.thumb} tabIndex={-1} aria-hidden="true">
                 <ProductImage src={item.image} alt="" />
               </Link>
 
               <div className={s["item-info"]}>
                 <p className="eyebrow">{item.series}</p>
                 <h2 className={s["item-name"]}>
-                  <Link to={`/products/${item.slug}`}>{item.name}</Link>
+                  <Link to={`/shop/${item.slug}`}>{item.name}</Link>
                 </h2>
                 <p className={`mono ${s.unit}`}>{formatPrice(item.price)}</p>
               </div>
@@ -90,7 +90,7 @@ export default function Cart() {
             Checkout
           </button>
           {!user && <p className={s.note}>You'll be asked to log in before checkout.</p>}
-          <Link to="/products" className={`text-link ${s.continue}`}>
+          <Link to="/shop" className={`text-link ${s.continue}`}>
             Continue shopping
           </Link>
         </aside>

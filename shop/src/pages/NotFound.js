@@ -8,10 +8,10 @@ export default function NotFound() {
       <h1 className="section-title">This page doesn't exist.</h1>
       <p className="lead">The link may be broken, or the watch is no longer available.</p>
       <div className={s.actions}>
-        <Link to="/products" className="btn btn-primary">
+        <Link to="/shop" className="btn btn-primary">
           Shop watches
         </Link>
-        <Link to="/" className="btn btn-outline">
+        <Link to="/home" className="btn btn-outline">
           Go home
         </Link>
       </div>

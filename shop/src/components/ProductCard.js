@@ -24,7 +24,7 @@ export default function ProductCard({ product }) {
 
   return (
     <article className={s.card}>
-      <Link to={`/products/${product.slug}`} className={s.media} aria-label={product.name}>
+      <Link to={`/shop/${product.slug}`} className={s.media} aria-label={product.name}>
         {badge && <span className={`badge ${s.badge}`}>{badge}</span>}
         <ProductImage src={product.image} alt="" />
       </Link>
@@ -32,7 +32,7 @@ export default function ProductCard({ product }) {
       <div className={s.body}>
         <p className="eyebrow">{product.series}</p>
         <h3 className={s.name}>
-          <Link to={`/products/${product.slug}`}>{product.name}</Link>
+          <Link to={`/shop/${product.slug}`}>{product.name}</Link>
         </h3>
         <p className={s.tagline}>{product.tagline}</p>
 

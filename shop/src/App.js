@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { useLenis } from "lenis/react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -26,6 +26,11 @@ function ScrollToTop() {
   return null;
 }
 
+function LegacyShopRedirect() {
+  const { pathname, search, hash } = useLocation();
+  return <Navigate to={`${pathname.replace(/^\/products(?=\/|$)/, "/shop")}${search}${hash}`} replace />;
+}
+
 export default function App() {
   return (
     <>
@@ -33,9 +38,12 @@ export default function App() {
       <Header />
       <main id="main">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/:slug" element={<ProductDetail />} />
+          <Route path="/" element={<Navigate to="/home" replace />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/shop" element={<Products />} />
+          <Route path="/shop/:slug" element={<ProductDetail />} />
+          <Route path="/products" element={<LegacyShopRedirect />} />
+          <Route path="/products/:slug" element={<LegacyShopRedirect />} />
           <Route path="/cart" element={<Cart />} />
           <Route
             path="/checkout"

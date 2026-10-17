@@ -33,26 +33,19 @@
 .chip {
   min-height: 40px;
   padding: 0 18px;
-  border: 1.5px solid var(--gray-200);
+  border: 0;
   border-radius: var(--radius-pill);
-  background-color: var(--white);
-  background-image: linear-gradient(var(--accent), var(--accent));
-  background-position: left center;
-  background-repeat: no-repeat;
-  background-size: 0 100%;
+  background-color: var(--gray-100);
   font-size: var(--small);
   font-weight: 600;
-  transition: border-color 0.2s var(--ease), background-size 0.35s var(--ease), color 0.2s var(--ease);
+  transition: color 0.2s var(--ease);
 }
 
 .chip:hover {
-  background-size: 100% 100%;
-  border-color: var(--accent);
   color: var(--ink);
 }
 
 .chip-active {
-  border-color: var(--ink);
   background-color: var(--ink);
   color: var(--white);
 }

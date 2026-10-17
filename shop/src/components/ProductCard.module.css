@@ -59,6 +59,12 @@
 .price {
   font-size: 15px;
   font-weight: 500;
+  transition: color .2s ease;
+}
+
+.card:hover .price,
+.card:focus-within .price {
+  color: var(--accent);
 }
 
 @media (min-width: 721px) and (max-width: 1024px) {

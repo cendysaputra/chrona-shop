@@ -13,8 +13,8 @@ export default function Footer() {
           </div>
 
           <nav className={s.links} aria-label="Footer">
-            <Link to="/" className="text-link">Home</Link>
-            <Link to="/products" className="text-link">Shop</Link>
+            <Link to="/home" className="text-link">Home</Link>
+            <Link to="/shop" className="text-link">Shop</Link>
             <Link to="/cart" className="text-link">Cart</Link>
           </nav>
         </div>

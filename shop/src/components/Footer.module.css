@@ -6,8 +6,8 @@
 .inner {
   display: flex;
   flex-direction: column;
-  gap: 56px;
-  padding-block: 80px 40px;
+  gap: 32px;
+  padding-block: 80px 24px;
 }
 
 .top {
@@ -51,9 +51,9 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 12px;
-  padding-top: 24px;
+  padding-top: 16px;
   border-top: 1px solid #2a2a2a;
-  font-family: var(--font-mono);
-  font-size: var(--label);
+  font-family: var(--font-sans);
+  font-size: var(--small);
   color: #9a9a9a;
 }
