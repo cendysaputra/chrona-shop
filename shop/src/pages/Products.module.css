@@ -1,0 +1,115 @@
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.title {
+  margin-top: 4px;
+}
+
+/* Filters */
+.toolbar {
+  position: sticky;
+  top: var(--header-h);
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 32px 0 40px;
+  padding-block: 16px;
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  min-height: 40px;
+  padding: 0 18px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-pill);
+  background-color: var(--white);
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: 0 100%;
+  font-size: var(--small);
+  font-weight: 600;
+  transition: border-color 0.2s var(--ease), background-size 0.35s var(--ease), color 0.2s var(--ease);
+}
+
+.chip:hover {
+  background-size: 100% 100%;
+  border-color: var(--accent);
+  color: var(--ink);
+}
+
+.chip-active {
+  border-color: var(--ink);
+  background-color: var(--ink);
+  color: var(--white);
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--small);
+}
+
+.sort select {
+  width: auto;
+  min-height: 40px;
+  padding-right: 12px;
+  font-size: var(--small);
+  font-weight: 600;
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 72px 20px;
+  transition: opacity 0.2s var(--ease);
+}
+
+.dim {
+  opacity: 0.5;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 40px;
+  }
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px 14px;
+  }
+
+  .toolbar {
+    position: static;
+  }
+
+  .chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+
+  .chip {
+    flex-shrink: 0;
+  }
+}

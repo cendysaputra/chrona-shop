@@ -1,0 +1,62 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.media {
+  position: relative;
+  display: flex;
+  aspect-ratio: 1 / 1;
+  padding: 12%;
+  border-radius: var(--radius-m);
+  background: var(--gray-50);
+  overflow: hidden;
+}
+
+.badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 1;
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding-top: 18px;
+}
+
+.name {
+  margin-top: 6px;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.name a {
+  text-decoration: none;
+}
+
+.tagline {
+  margin-top: 8px;
+  font-size: var(--small);
+  color: var(--gray-600);
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.price {
+  font-size: 15px;
+  font-weight: 500;
+}

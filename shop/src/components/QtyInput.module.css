@@ -1,0 +1,46 @@
+.qty {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-pill);
+}
+
+.qty button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--ink);
+}
+
+.qty button:hover:not(:disabled) {
+  background: var(--gray-50);
+}
+
+.qty button:disabled {
+  color: var(--gray-300);
+  cursor: not-allowed;
+}
+
+.qty output {
+  min-width: 32px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.md button {
+  width: 46px;
+  height: 46px;
+}
+
+.sm button {
+  width: 36px;
+  height: 36px;
+}
+
+.sm output {
+  min-width: 24px;
+  font-size: var(--small);
+}

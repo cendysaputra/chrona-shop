@@ -1,0 +1,45 @@
+.wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 440px;
+}
+
+.title {
+  font-size: var(--display-m);
+  font-weight: 700;
+}
+
+.sub {
+  margin-top: -8px;
+  color: var(--gray-600);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 8px;
+}
+
+.form :global(.btn) {
+  margin-top: 8px;
+  min-height: 52px;
+}
+
+.switch {
+  padding-top: 20px;
+  border-top: 1px solid var(--gray-100);
+  font-size: var(--small);
+  color: var(--gray-600);
+}
+
+.switch a {
+  color: var(--ink);
+}

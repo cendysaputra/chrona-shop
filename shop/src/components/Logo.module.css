@@ -1,0 +1,22 @@
+.logo {
+  display: inline-flex;
+  align-items: baseline;
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  font-weight: 500;
+  color: inherit;
+}
+
+.md {
+  font-size: 22px;
+}
+
+.xl {
+  font-size: clamp(64px, 12vw, 168px);
+  letter-spacing: 0.02em;
+}
+
+.dot {
+  color: var(--accent);
+}
