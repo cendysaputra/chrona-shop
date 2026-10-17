@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { useLenis } from "lenis/react";
 import { getProduct, getProducts } from "../api/productApi";
 import { getErrorMessage } from "../api/axiosClient";
 import { useCart } from "../context/CartContext";
@@ -22,61 +23,33 @@ export default function Home() {
 
 function Hero() {
   const heroRef = useRef(null);
+  const updateParallax = useCallback(() => {
+    const hero = heroRef.current;
+    if (!hero) return;
+
+    const bounds = hero.getBoundingClientRect();
+    const distance = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? 0
+      : Math.min(Math.max(-bounds.top, 0), bounds.height);
+
+    hero.style.setProperty("--hero-scroll", `${distance.toFixed(2)}px`);
+  }, []);
+
+  useLenis(updateParallax);
 
   useEffect(() => {
     const hero = heroRef.current;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const getDistance = () => {
-      const bounds = hero.getBoundingClientRect();
-      return reducedMotion.matches ? 0 : Math.min(Math.max(-bounds.top, 0), bounds.height);
-    };
-    let current = getDistance();
-    let target = current;
-    let frame = null;
-    let lastTime = 0;
-    let needsMeasure = false;
-
-    hero.style.setProperty("--hero-scroll", `${current}px`);
-
-    const animate = (time) => {
-      frame = null;
-      if (needsMeasure) {
-        target = getDistance();
-        needsMeasure = false;
-      }
-
-      if (reducedMotion.matches) {
-        current = target;
-      } else {
-        const elapsed = lastTime ? Math.min(time - lastTime, 64) : 16;
-        const easing = 1 - Math.exp(-elapsed / 90);
-        current += (target - current) * easing;
-        if (Math.abs(target - current) < 0.25) current = target;
-      }
-
-      hero.style.setProperty("--hero-scroll", `${current.toFixed(2)}px`);
-      lastTime = time;
-      if (current !== target) frame = window.requestAnimationFrame(animate);
-      else lastTime = 0;
-    };
-
-    const scheduleUpdate = () => {
-      needsMeasure = true;
-      if (frame === null) frame = window.requestAnimationFrame(animate);
-    };
-
-    window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", scheduleUpdate);
-    reducedMotion.addEventListener("change", scheduleUpdate);
+    updateParallax();
+    window.addEventListener("resize", updateParallax);
+    reducedMotion.addEventListener("change", updateParallax);
 
     return () => {
-      window.removeEventListener("scroll", scheduleUpdate);
-      window.removeEventListener("resize", scheduleUpdate);
-      reducedMotion.removeEventListener("change", scheduleUpdate);
-      if (frame !== null) window.cancelAnimationFrame(frame);
-      hero.style.removeProperty("--hero-scroll");
+      window.removeEventListener("resize", updateParallax);
+      reducedMotion.removeEventListener("change", updateParallax);
+      hero?.style.removeProperty("--hero-scroll");
     };
-  }, []);
+  }, [updateParallax]);
 
   return (
     <section ref={heroRef} className={s.hero} aria-labelledby="hero-title">
@@ -143,7 +116,7 @@ function FeatureTile({ product, label, dark = false }) {
         <h3>Chrona {product.series}</h3>
         <p className={s["tile-price"]}>{formatPrice(product.price)}</p>
         <div className={s["tile-actions"]}>
-          <Link to={`/products/${product.slug}`}>Learn more</Link>
+          <Link to={`/products/${product.slug}`} className="text-link">Learn more</Link>
           <button type="button" onClick={handleAdd} disabled={product.stock <= 0}>
             {product.stock <= 0 ? "Sold out" : added ? "Added" : "Add to cart"}
           </button>

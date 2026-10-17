@@ -20,17 +20,6 @@ export default function Header() {
   return (
     <header className={`${s.header} ${pathname === "/" ? s["home-header"] : ""}`}>
       <div className={`container ${s.inner}`}>
-        <button
-          type="button"
-          className={s["menu-btn"]}
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          aria-controls="main-nav"
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <CloseIcon /> : <MenuIcon />}
-        </button>
-
         <nav id="main-nav" className={`${s.nav} ${open ? s.open : ""}`} aria-label="Main">
           <NavLink to="/" end className={navClass}>
             Home
@@ -66,6 +55,17 @@ export default function Header() {
             </Link>
           )}
         </div>
+
+        <button
+          type="button"
+          className={s["menu-btn"]}
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          aria-controls="main-nav"
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? <CloseIcon /> : <MenuIcon />}
+        </button>
       </div>
     </header>
   );

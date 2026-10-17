@@ -53,10 +53,22 @@
   justify-content: space-between;
   gap: 12px;
   margin-top: auto;
-  padding-top: 18px;
+  padding-top: 10px;
 }
 
 .price {
   font-size: 15px;
   font-weight: 500;
+}
+
+@media (min-width: 721px) and (max-width: 1024px) {
+  .footer {
+    padding-top: 24px;
+  }
+}
+
+@media (max-width: 720px) {
+  .footer {
+    padding-top: 16px;
+  }
 }

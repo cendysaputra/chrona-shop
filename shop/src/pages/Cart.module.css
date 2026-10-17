@@ -84,8 +84,6 @@
   background: none;
   font-size: 13px;
   color: var(--gray-600);
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 
 .remove:hover {

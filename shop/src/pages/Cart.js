@@ -58,7 +58,7 @@ export default function Cart() {
                   label={`Quantity for ${item.name}`}
                   onChange={(v) => updateQty(item.slug, v)}
                 />
-                <button type="button" className={s.remove} onClick={() => removeItem(item.slug)}>
+                <button type="button" className={`text-link ${s.remove}`} onClick={() => removeItem(item.slug)}>
                   Remove
                 </button>
               </div>

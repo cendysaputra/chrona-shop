@@ -13,8 +13,6 @@
 
 .crumbs a:hover {
   color: var(--ink);
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 
 .crumbs [aria-current] {

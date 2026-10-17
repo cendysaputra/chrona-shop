@@ -56,9 +56,9 @@ function Detail({ product }) {
   return (
     <>
       <nav className={s.crumbs} aria-label="Breadcrumb">
-        <Link to="/products">Shop</Link>
+        <Link to="/products" className="text-link">Shop</Link>
         <span aria-hidden="true">/</span>
-        <Link to={`/products?series=${encodeURIComponent(product.series)}`}>{product.series}</Link>
+        <Link to={`/products?series=${encodeURIComponent(product.series)}`} className="text-link">{product.series}</Link>
         <span aria-hidden="true">/</span>
         <span aria-current="page">{product.name}</span>
       </nav>
