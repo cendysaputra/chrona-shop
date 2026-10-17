@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
-import { formatPrice, tagLabel } from "../utils/format";
+import { formatPrice } from "../utils/format";
+import { CartIcon } from "./Icons";
 import ProductImage from "./ProductImage";
 import s from "./ProductCard.module.css";
 
 export default function ProductCard({ product }) {
   const { addItem } = useCart();
   const [added, setAdded] = useState(false);
-  const badge = tagLabel(product.tags);
   const soldOut = product.stock <= 0;
 
   useEffect(() => {
@@ -25,21 +25,25 @@ export default function ProductCard({ product }) {
   return (
     <article className={s.card}>
       <Link to={`/shop/${product.slug}`} className={s.media} aria-label={product.name}>
-        {badge && <span className={`badge ${s.badge}`}>{badge}</span>}
         <ProductImage src={product.image} alt="" />
       </Link>
 
       <div className={s.body}>
-        <p className="eyebrow">{product.series}</p>
         <h3 className={s.name}>
           <Link to={`/shop/${product.slug}`}>{product.name}</Link>
         </h3>
         <p className={s.tagline}>{product.tagline}</p>
 
         <div className={s.footer}>
-          <span className={`mono ${s.price}`}>{formatPrice(product.price)}</span>
-          <button type="button" className="btn btn-primary btn-sm" onClick={handleAdd} disabled={soldOut}>
-            {soldOut ? "Sold out" : added ? "Added" : "Add to cart"}
+          <span className={s.price}>{formatPrice(product.price)}</span>
+          <button
+            type="button"
+            className={s.cart}
+            onClick={handleAdd}
+            disabled={soldOut}
+            aria-label={soldOut ? `${product.name} sold out` : added ? `${product.name} added to cart` : `Add ${product.name} to cart`}
+          >
+            {added ? <span aria-hidden="true">✓</span> : <CartIcon />}
           </button>
         </div>
       </div>

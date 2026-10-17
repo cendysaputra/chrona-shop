@@ -20,7 +20,7 @@
   font-weight: 600;
 }
 
-/* Layout */
+/* Detail layout */
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
@@ -45,7 +45,7 @@
   z-index: 1;
 }
 
-/* Info */
+/* Product info */
 .info {
   display: flex;
   flex-direction: column;
@@ -162,7 +162,7 @@
   transform: translateY(-50%);
 }
 
-/* Specs */
+/* Product specs */
 .specs,
 .related {
   margin-top: var(--section-gap);

@@ -6,7 +6,7 @@ import { getErrorMessage } from "../api/axiosClient";
 import { useCart } from "../context/CartContext";
 import useAsync from "../hooks/useAsync";
 import { formatPrice } from "../utils/format";
-import { CartIcon } from "../components/Icons";
+import ProductCard from "../components/ProductCard";
 import ProductImage from "../components/ProductImage";
 import Status from "../components/Status";
 import s from "./Home.module.css";
@@ -142,41 +142,9 @@ function Collection() {
       {error && <Status tone="error">{getErrorMessage(error)}</Status>}
       {data && (
         <div className={s["product-grid"]}>
-          {data.map((product) => <HomeProductCard key={product.slug} product={product} />)}
+          {data.map((product) => <ProductCard key={product.slug} product={product} />)}
         </div>
       )}
     </section>
-  );
-}
-
-function HomeProductCard({ product }) {
-  const { addItem } = useCart();
-  const [added, setAdded] = useState(false);
-
-  useEffect(() => {
-    if (!added) return;
-    const timer = setTimeout(() => setAdded(false), 1600);
-    return () => clearTimeout(timer);
-  }, [added]);
-
-  const handleAdd = () => {
-    addItem(product, 1);
-    setAdded(true);
-  };
-
-  return (
-    <article className={s["product-card"]}>
-      <Link to={`/shop/${product.slug}`} className={s["product-image"]} aria-label={product.name}>
-        <ProductImage src={product.image} alt="" />
-      </Link>
-      <h3><Link to={`/shop/${product.slug}`}>{product.name}</Link></h3>
-      <p className={s["product-tagline"]}>{product.tagline}</p>
-      <div className={s["product-bottom"]}>
-        <span>{formatPrice(product.price)}</span>
-        <button type="button" onClick={handleAdd} disabled={product.stock <= 0} aria-label={product.stock <= 0 ? `${product.name} sold out` : added ? `${product.name} added to cart` : `Add ${product.name} to cart`}>
-          {added ? <span aria-hidden="true">✓</span> : <CartIcon />}
-        </button>
-      </div>
-    </article>
   );
 }

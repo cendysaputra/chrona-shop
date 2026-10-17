@@ -1,4 +1,4 @@
-/* Reset */
+/* Base reset */
 *,
 *::before,
 *::after {
@@ -73,7 +73,7 @@ button {
   color: var(--white);
 }
 
-/* Layout */
+/* Page layout */
 .container {
   width: 100%;
   max-width: calc(var(--container) + var(--gutter) * 2);
@@ -90,7 +90,7 @@ button {
   min-height: calc(100vh - var(--header-h));
 }
 
-/* Type */
+/* Text styles */
 .display-xl {
   font-size: var(--display-xl);
   font-weight: 300;
@@ -125,7 +125,7 @@ button {
   color: var(--gray-600);
 }
 
-/* Buttons */
+/* Button styles */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -227,7 +227,7 @@ button {
   transform: scaleX(1);
 }
 
-/* Badge */
+/* Badge styles */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -248,7 +248,7 @@ button {
   color: var(--white);
 }
 
-/* Forms */
+/* Form styles */
 .input,
 .select {
   width: 100%;
@@ -282,7 +282,7 @@ textarea.input {
   border-color: var(--danger);
 }
 
-/* Utils */
+/* Utility styles */
 .visually-hidden {
   position: absolute;
   width: 1px;

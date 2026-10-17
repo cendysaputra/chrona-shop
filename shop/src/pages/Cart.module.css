@@ -19,7 +19,7 @@
   align-items: start;
 }
 
-/* Items */
+/* Cart items */
 .list {
   margin: 0;
   padding: 0;
@@ -96,7 +96,7 @@
   text-align: right;
 }
 
-/* Summary */
+/* Cart summary */
 .summary {
   position: sticky;
   top: calc(var(--header-h) + 24px);

@@ -12,7 +12,7 @@
   align-items: start;
 }
 
-/* Form */
+/* Checkout form */
 .form {
   display: flex;
   flex-direction: column;
@@ -45,7 +45,7 @@
   gap: 20px;
 }
 
-/* Payment */
+/* Payment options */
 .payments {
   display: grid;
   gap: 12px;
@@ -92,7 +92,7 @@
   color: var(--gray-600);
 }
 
-/* Summary */
+/* Order summary */
 .summary {
   position: sticky;
   top: calc(var(--header-h) + 24px);
