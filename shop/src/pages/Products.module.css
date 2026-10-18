@@ -304,7 +304,9 @@
 
 @media (max-width: 760px) {
   .hero {
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-6);
     min-height: max(60svh, 430px);
   }
 
@@ -328,12 +330,15 @@
     font-size: var(--text-2xs);
   }
 
+  /* Bottom anchored */
   .hero-watch {
-    right: 50%;
-    top: clamp(300px, 48%, 350px);
+    position: relative;
+    right: auto;
     bottom: auto;
     width: min(50vw, 300px);
-    transform: translateX(50%);
+    margin-top: auto;
+    margin-bottom: calc(var(--space-8) * -1);
+    transform: none;
   }
 
   .title {
