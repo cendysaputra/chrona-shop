@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { getErrorMessage, getFieldErrors } from "../api/axiosClient";
 import { useAuth } from "../context/AuthContext";
+import AuthLayout from "../components/AuthLayout";
 import Field from "../components/Field";
 import Status from "../components/Status";
 import s from "./Auth.module.css";
@@ -44,10 +45,10 @@ export default function Register() {
   };
 
   return (
-    <div className={`page container ${s.wrap}`}>
+    <AuthLayout>
       <div className={s.card}>
-        <p className="eyebrow">Account</p>
-        <h1 className={s.title}>Create your account.</h1>
+        <p className={s.eyebrow}>Account</p>
+        <h1 className={s.title}>Create your account<span>.</span></h1>
         <p className={s.sub}>One account for the Chrona web store and app.</p>
 
         {error && <Status tone="error">{error}</Status>}
@@ -78,6 +79,6 @@ export default function Register() {
           </Link>
         </p>
       </div>
-    </div>
+    </AuthLayout>
   );
 }

@@ -21,6 +21,16 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+#main {
+  flex: 1;
+}
+
 h1,
 h2,
 h3,
@@ -87,7 +97,6 @@ button {
 
 .page {
   padding-block: var(--page-top) var(--section-gap);
-  min-height: calc(100vh - var(--header-h));
 }
 
 /* Text styles */
@@ -251,11 +260,11 @@ button {
   width: 100%;
   min-height: var(--control-2xl);
   padding: 0 var(--space-4);
-  border: var(--border-thick) solid var(--gray-200);
+  border: var(--border-thick) solid transparent;
   border-radius: var(--radius-lg);
-  background: var(--white);
+  background: #f3f3f3;
   font-size: var(--text-base);
-  transition: border-color 0.2s var(--ease);
+  transition: border-color 0.2s var(--ease), background-color 0.2s var(--ease);
 }
 
 textarea.input {
@@ -266,13 +275,14 @@ textarea.input {
 
 .input:hover,
 .select:hover {
-  border-color: var(--gray-300);
+  background: #e9e9e9;
 }
 
 .input:focus,
 .select:focus {
   outline: none;
   border-color: var(--ink);
+  background: var(--white);
 }
 
 .input[aria-invalid="true"] {

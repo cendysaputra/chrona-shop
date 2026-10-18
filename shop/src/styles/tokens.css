@@ -4,6 +4,7 @@
   --white: #ffffff;
   --ink: #0a0a0a;
   --ink-soft: #262626;
+  --gray-25: #fafafa;
   --gray-50: #f6f6f6;
   --gray-100: #eeeeee;
   --gray-200: #e2e2e2;
@@ -110,7 +111,6 @@
   --section-gap: clamp(88px, 11vw, 144px);
   --section-space: clamp(110px, 10vw, 150px);
   --section-space-end: clamp(120px, 11vw, 170px);
-  --layout-gap-sm: clamp(32px, 5vw, 64px);
   --layout-gap: clamp(32px, 5vw, 72px);
   --layout-gap-lg: clamp(32px, 6vw, 88px);
   --stack-gap: clamp(56px, 6vw, 88px);
@@ -151,7 +151,6 @@
   /* Component sizes */
   --form-width: 440px;
   --summary-width: 400px;
-  --summary-width-sm: 380px;
   --measure: 760px;
   --hero-measure: 680px;
   --hero-measure-md: 660px;
@@ -166,6 +165,9 @@
   --chevron-size: 7px;
   --logo-width: 56px;
   --logo-height: 32px;
+  --auth-panel-height: 560px;
+  --auth-panel-height-sm: clamp(340px, 62vw, 480px);
+  --form-width-lg: 560px;
 
   /* Layout tokens */
   --container: 1200px;

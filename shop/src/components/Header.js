@@ -6,6 +6,8 @@ import { CartIcon, CloseIcon, MenuIcon } from "./Icons";
 import Logo from "./Logo";
 import s from "./Header.module.css";
 
+const HERO_PAGES = ["/home", "/shop", "/login", "/register"];
+
 export default function Header() {
   const { user, logout } = useAuth();
   const { count } = useCart();
@@ -16,9 +18,10 @@ export default function Header() {
 
   const firstName = user?.name?.split(" ")[0];
   const navClass = ({ isActive }) => `${s["nav-link"]} ${isActive ? s.active : ""}`;
+  const isHero = HERO_PAGES.includes(pathname);
 
   return (
-    <header className={`${s.header} ${pathname === "/home" || pathname === "/shop" ? s["home-header"] : ""} ${pathname.startsWith("/shop/") || pathname === "/checkout" ? s["detail-header"] : ""}`}>
+    <header className={`${s.header} ${isHero ? s["home-header"] : s["detail-header"]}`}>
       <div className={`container ${s.inner}`}>
         <nav id="main-nav" className={`${s.nav} ${open ? s.open : ""}`} aria-label="Main">
           <NavLink to="/home" end className={navClass}>
@@ -28,9 +31,14 @@ export default function Header() {
             Shop
           </NavLink>
           {user && (
-            <button type="button" className={`${s["nav-link"]} ${s["mobile-only"]}`} onClick={logout}>
-              Log out
-            </button>
+            <>
+              <NavLink to="/account" className={(state) => `${navClass(state)} ${s["mobile-only"]}`}>
+                Account
+              </NavLink>
+              <button type="button" className={`${s["nav-link"]} ${s["mobile-only"]}`} onClick={logout}>
+                Log out
+              </button>
+            </>
           )}
         </nav>
 
@@ -44,7 +52,9 @@ export default function Header() {
 
           {user ? (
             <div className={s.user}>
-              <span className={s.hello}>Hi, {firstName}</span>
+              <Link to="/account" className={`text-link ${s.hello}`}>
+                Hi, {firstName}
+              </Link>
               <button type="button" className={`btn btn-outline btn-sm ${s["desktop-only"]}`} onClick={logout}>
                 Log out
               </button>

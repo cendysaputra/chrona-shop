@@ -76,27 +76,6 @@
   gap: var(--space-5);
 }
 
-/* Filled inputs */
-.form :global(.input) {
-  border-color: transparent;
-  background: #f3f3f3;
-  transition: border-color 0.2s var(--ease), background-color 0.2s var(--ease);
-}
-
-.form :global(.input):hover {
-  border-color: transparent;
-  background: #e9e9e9;
-}
-
-.form :global(.input):focus {
-  border-color: var(--ink);
-  background: var(--white);
-}
-
-.form :global(.input)[aria-invalid="true"] {
-  border-color: var(--danger);
-}
-
 /* Payment options */
 .payments {
   display: grid;

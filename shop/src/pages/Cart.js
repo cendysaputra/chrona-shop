@@ -7,16 +7,18 @@ import QtyInput from "../components/QtyInput";
 import s from "./Cart.module.css";
 
 export default function Cart() {
-  const { items, count, subtotal, updateQty, removeItem } = useCart();
+  const { items, subtotal, updateQty, removeItem } = useCart();
   const { user } = useAuth();
   const navigate = useNavigate();
 
   if (items.length === 0) {
     return (
-      <div className={`page container ${s.empty}`}>
-        <p className="eyebrow">Cart</p>
-        <h1 className="section-title">Your cart is empty.</h1>
-        <p className="lead">Find a watch you like and it will show up here.</p>
+      <div className={`page container ${s.page} ${s.empty}`}>
+        <div className={s["empty-copy"]}>
+          <p className={s.eyebrow}>Cart</p>
+          <h1 className={s.title}>Your cart is empty<span>.</span></h1>
+          <p className={s.message}>Find a watch you like and it will show up here.</p>
+        </div>
         <Link to="/shop" className="btn btn-primary">
           Shop watches
         </Link>
@@ -25,13 +27,10 @@ export default function Cart() {
   }
 
   return (
-    <div className="page container">
+    <div className={`page container ${s.page}`}>
       <header className={s.head}>
-        <p className="eyebrow">Cart</p>
-        <h1 className="section-title">Your cart</h1>
-        <p className="muted">
-          {count} {count === 1 ? "item" : "items"}
-        </p>
+        <p className={s.eyebrow}>Cart</p>
+        <h1 className={s.title}>Your cart<span>.</span></h1>
       </header>
 
       <div className={s.layout}>
@@ -43,11 +42,11 @@ export default function Cart() {
               </Link>
 
               <div className={s["item-info"]}>
-                <p className="eyebrow">{item.series}</p>
+                <p className={s.eyebrow}>{item.series}</p>
                 <h2 className={s["item-name"]}>
                   <Link to={`/shop/${item.slug}`}>{item.name}</Link>
                 </h2>
-                <p className={`mono ${s.unit}`}>{formatPrice(item.price)}</p>
+                <p className={s.unit}>{formatPrice(item.price)}</p>
               </div>
 
               <div className={s["item-controls"]}>
@@ -63,7 +62,7 @@ export default function Cart() {
                 </button>
               </div>
 
-              <p className={`mono ${s["line-total"]}`}>{formatPrice(item.price * item.qty)}</p>
+              <p className={s["line-total"]}>{formatPrice(item.price * item.qty)}</p>
             </li>
           ))}
         </ul>
@@ -75,7 +74,7 @@ export default function Cart() {
           <dl className={s.rows}>
             <div>
               <dt>Subtotal</dt>
-              <dd className="mono">{formatPrice(subtotal)}</dd>
+              <dd>{formatPrice(subtotal)}</dd>
             </div>
             <div>
               <dt>Shipping</dt>
@@ -83,10 +82,10 @@ export default function Cart() {
             </div>
             <div className={s.total}>
               <dt>Total</dt>
-              <dd className="mono">{formatPrice(subtotal)}</dd>
+              <dd>{formatPrice(subtotal)}</dd>
             </div>
           </dl>
-          <button type="button" className="btn btn-primary btn-block" onClick={() => navigate("/checkout")}>
+          <button type="button" className={`btn btn-primary btn-block ${s.submit}`} onClick={() => navigate("/checkout")}>
             Checkout
           </button>
           {!user && <p className={s.note}>You'll be asked to log in before checkout.</p>}

@@ -1,0 +1,133 @@
+.layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-height: 100svh;
+  padding: var(--space-4);
+}
+
+.content {
+  align-self: center;
+  justify-self: center;
+  width: 100%;
+  max-width: calc(var(--form-width) + var(--gutter) * 2);
+  padding: calc(var(--header-h) + var(--space-8)) var(--gutter) var(--space-12);
+}
+
+/* Visual panel */
+.showcase {
+  position: relative;
+  display: flex;
+  min-height: var(--auth-panel-height);
+  padding: calc(var(--header-h) + var(--space-12)) var(--space-12) var(--space-12);
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(to bottom, #eee, #f5f5f5);
+  isolation: isolate;
+}
+
+.showcase::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 14%;
+  background: linear-gradient(to bottom, #f5f5f500, #f5f5f5);
+  pointer-events: none;
+}
+
+.clock {
+  position: absolute;
+  z-index: 0;
+  top: 66%;
+  left: 50%;
+  width: 92%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.clock img {
+  width: 100%;
+  height: 100%;
+  opacity: .62;
+  animation: seconds 60s linear infinite;
+}
+
+@keyframes seconds {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.watch {
+  position: absolute;
+  z-index: 1;
+  bottom: -12%;
+  left: 50%;
+  width: 62%;
+  max-width: none;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 16px 22px rgb(0 0 0 / 8%));
+  pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 7fr);
+    min-height: 0;
+    padding: var(--space-4) var(--space-2);
+  }
+
+  .clock {
+    top: 72%;
+    width: 170%;
+  }
+
+  .watch {
+    bottom: -4%;
+    width: 80%;
+  }
+
+  .content {
+    max-width: calc(var(--form-width-lg) + var(--space-10) * 2);
+    padding-inline: var(--space-10);
+  }
+}
+
+@media (max-width: 720px) {
+  .layout {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    padding: var(--space-2) var(--space-2) 0;
+  }
+
+  .showcase {
+    min-height: 0;
+    height: var(--auth-panel-height-sm);
+    padding: 0;
+  }
+
+  .clock {
+    top: 78%;
+    width: min(110%, 640px);
+  }
+
+  .watch {
+    bottom: -16%;
+    width: 66%;
+  }
+
+  .content {
+    justify-self: stretch;
+    max-width: none;
+    padding: var(--space-12) var(--gutter) var(--section-space-end);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clock img {
+    animation: none;
+  }
+}

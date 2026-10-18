@@ -15,7 +15,8 @@ export default function ProtectedRoute({ children }) {
   }
 
   if (!user) {
-    return <Navigate to="/login" replace state={{ from: location.pathname, reason: "checkout" }} />;
+    const reason = location.pathname.split("/")[1];
+    return <Navigate to="/login" replace state={{ from: location.pathname, reason }} />;
   }
 
   return children;

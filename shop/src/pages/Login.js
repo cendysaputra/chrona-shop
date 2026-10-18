@@ -2,9 +2,15 @@ import { useState } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { getErrorMessage, getFieldErrors } from "../api/axiosClient";
 import { useAuth } from "../context/AuthContext";
+import AuthLayout from "../components/AuthLayout";
 import Field from "../components/Field";
 import Status from "../components/Status";
 import s from "./Auth.module.css";
+
+const REASON_MESSAGES = {
+  checkout: "Log in to finish your order.",
+  account: "Log in to see your account.",
+};
 
 export default function Login() {
   const { user, login } = useAuth();
@@ -37,13 +43,11 @@ export default function Login() {
   };
 
   return (
-    <div className={`page container ${s.wrap}`}>
+    <AuthLayout>
       <div className={s.card}>
-        <p className="eyebrow">Account</p>
-        <h1 className={s.title}>Welcome back.</h1>
-        <p className={s.sub}>
-          {location.state?.reason === "checkout" ? "Log in to finish your order." : "Log in to check out faster."}
-        </p>
+        <p className={s.eyebrow}>Account</p>
+        <h1 className={s.title}>Welcome back<span>.</span></h1>
+        <p className={s.sub}>{REASON_MESSAGES[location.state?.reason] || "Log in to check out faster."}</p>
 
         {error && <Status tone="error">{error}</Status>}
 
@@ -62,6 +66,6 @@ export default function Login() {
           </Link>
         </p>
       </div>
-    </div>
+    </AuthLayout>
   );
 }
