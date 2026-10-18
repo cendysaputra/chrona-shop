@@ -34,7 +34,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <SmoothScroll>
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_startTransition: true }}>
         <AuthProvider>
           <CartProvider>
             <App />

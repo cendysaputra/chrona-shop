@@ -2,16 +2,18 @@ import { Image } from 'expo-image';
 import { useState } from 'react';
 import { StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 
+import useInView from '@/hooks/useInView';
 import { colors } from '@/theme';
 import { imageUrl } from '@/utils/format';
 
-// Image with fallback
+// Gambar lazy + fallback
 export default function ProductImage({ path, style }: { path?: string; style?: StyleProp<ViewStyle> }) {
   const [failed, setFailed] = useState(!path);
+  const { ref, inView, onLayout } = useInView();
 
   return (
-    <View style={[styles.box, style]}>
-      {failed ? (
+    <View ref={ref} onLayout={onLayout} style={[styles.box, style]}>
+      {!inView ? null : failed ? (
         <View style={styles.mark} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
           <View style={[styles.strap, styles.strapTop]} />
           <View style={styles.case} />

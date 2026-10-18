@@ -1,13 +1,14 @@
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { RefreshControl, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { RefreshControl, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 
 import { getErrorMessage } from '@/api/axiosClient';
 import { getProduct, getProducts } from '@/api/productApi';
 import Button from '@/components/Button';
 import ClockPattern from '@/components/ClockPattern';
 import { HeroBackground, HeroFade } from '@/components/HeroGradient';
+import LazyScrollView from '@/components/LazyScrollView';
 import ProductGrid from '@/components/ProductGrid';
 import ProductImage from '@/components/ProductImage';
 import SectionTitle from '@/components/SectionTitle';
@@ -32,7 +33,7 @@ export default function HomeScreen() {
   };
 
   return (
-    <ScrollView
+    <LazyScrollView
       style={styles.screen}
       contentContainerStyle={styles.content}
       refreshControl={<RefreshControl refreshing={featured.refreshing || collection.refreshing} onRefresh={onRefresh} tintColor={colors.ink} />}
@@ -65,7 +66,7 @@ export default function HomeScreen() {
         {!!collection.error && <StatusView tone="error" message={getErrorMessage(collection.error)} actionLabel="Try again" onAction={collection.reload} />}
         {collection.data && <ProductGrid products={collection.data} />}
       </View>
-    </ScrollView>
+    </LazyScrollView>
   );
 }
 

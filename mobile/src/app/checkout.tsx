@@ -15,6 +15,7 @@ import {
 
 import Button from '@/components/Button';
 import Field from '@/components/Field';
+import LazyScrollView from '@/components/LazyScrollView';
 import ProductImage from '@/components/ProductImage';
 import SectionTitle from '@/components/SectionTitle';
 import SummaryRows from '@/components/SummaryRows';
@@ -141,7 +142,7 @@ export default function CheckoutScreen() {
 
   return (
     <KeyboardAvoidingView style={styles.screen} behavior={Platform.OS === 'ios' ? 'padding' : undefined} keyboardVerticalOffset={90}>
-      <ScrollView ref={scrollRef} contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
+      <LazyScrollView ref={scrollRef} contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
         <Text style={type.eyebrow}>Checkout</Text>
         <SectionTitle style={styles.title}>Almost yours</SectionTitle>
 
@@ -270,7 +271,7 @@ export default function CheckoutScreen() {
             Back to cart
           </Text>
         </View>
-      </ScrollView>
+      </LazyScrollView>
     </KeyboardAvoidingView>
   );
 }

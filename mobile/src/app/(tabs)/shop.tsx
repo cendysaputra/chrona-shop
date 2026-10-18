@@ -71,6 +71,10 @@ export default function ShopScreen() {
       )}
       ListHeaderComponent={header}
       ItemSeparatorComponent={() => <View style={styles.rowGap} />}
+      // Baris lazy
+      initialNumToRender={2}
+      maxToRenderPerBatch={2}
+      windowSize={5}
       contentContainerStyle={styles.content}
       refreshControl={<RefreshControl refreshing={list.refreshing} onRefresh={list.refresh} tintColor={colors.ink} />}
       showsVerticalScrollIndicator={false}

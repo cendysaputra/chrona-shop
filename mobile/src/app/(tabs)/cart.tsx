@@ -1,7 +1,8 @@
 import { router } from 'expo-router';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import Button from '@/components/Button';
+import LazyScrollView from '@/components/LazyScrollView';
 import ProductImage from '@/components/ProductImage';
 import QtyStepper from '@/components/QtyStepper';
 import SectionTitle from '@/components/SectionTitle';
@@ -23,19 +24,19 @@ export default function CartScreen() {
 
   if (items.length === 0) {
     return (
-      <ScrollView style={styles.screen} contentContainerStyle={styles.content}>
+      <LazyScrollView style={styles.screen} contentContainerStyle={styles.content}>
         <View style={styles.emptyCopy}>
           <Text style={type.eyebrow}>Cart</Text>
           <SectionTitle>Your cart is empty</SectionTitle>
           <Text style={type.body}>Find a watch you like and it will show up here.</Text>
         </View>
         <Button title="Shop watches" onPress={() => router.navigate('/shop')} style={styles.emptyBtn} />
-      </ScrollView>
+      </LazyScrollView>
     );
   }
 
   return (
-    <ScrollView style={styles.screen} contentContainerStyle={styles.content}>
+    <LazyScrollView style={styles.screen} contentContainerStyle={styles.content}>
       <Text style={type.eyebrow}>Cart</Text>
       <SectionTitle style={styles.title}>Your cart</SectionTitle>
 
@@ -56,7 +57,7 @@ export default function CartScreen() {
           Continue shopping
         </Text>
       </View>
-    </ScrollView>
+    </LazyScrollView>
   );
 }
 

@@ -1,12 +1,13 @@
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { router, Stack, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import { getErrorMessage, getStatus } from '@/api/axiosClient';
 import { getProduct, getProducts } from '@/api/productApi';
 import Badge from '@/components/Badge';
 import Button from '@/components/Button';
+import LazyScrollView from '@/components/LazyScrollView';
 import ProductGrid from '@/components/ProductGrid';
 import ProductImage from '@/components/ProductImage';
 import QtyStepper from '@/components/QtyStepper';
@@ -72,7 +73,7 @@ function Detail({ product }: { product: Product }) {
   };
 
   return (
-    <ScrollView style={styles.screen} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+    <LazyScrollView style={styles.screen} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
       <Stack.Screen options={{ title: `Chrona ${product.series}` }} />
 
       <View>
@@ -169,7 +170,7 @@ function Detail({ product }: { product: Product }) {
           <ProductGrid products={related.data} />
         </View>
       )}
-    </ScrollView>
+    </LazyScrollView>
   );
 }
 

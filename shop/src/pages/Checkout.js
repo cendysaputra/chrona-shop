@@ -152,7 +152,7 @@ export default function Checkout() {
                     <span className={s.logos}>
                       {p.logos.map((logo) => (
                         <span key={logo.name} className={s.logo} title={logo.name}>
-                          {logo.src ? <img src={logo.src} alt={logo.name} /> : <span className="visually-hidden">{logo.name}</span>}
+                          {logo.src ? <img src={logo.src} alt={logo.name} loading="lazy" decoding="async" /> : <span className="visually-hidden">{logo.name}</span>}
                         </span>
                       ))}
                     </span>
