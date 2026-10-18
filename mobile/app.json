@@ -42,6 +42,19 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "73c74857-daa7-45b0-9c25-bb9a178d64b8"
+      }
+    },
+    "owner": "cendysaputra-team",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/73c74857-daa7-45b0-9c25-bb9a178d64b8"
     }
   }
 }
