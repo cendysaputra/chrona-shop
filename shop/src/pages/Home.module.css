@@ -269,7 +269,7 @@
 
 @media (max-width: 1024px) {
   .hero {
-    height: 56svh;
+    height: 75svh;
     min-height: 480px;
     margin-inline: var(--space-2);
   }
@@ -308,7 +308,6 @@
 
 @media (max-width: 720px) {
   .hero {
-    height: 60svh;
     min-height: 430px;
     margin-top: var(--space-2);
   }

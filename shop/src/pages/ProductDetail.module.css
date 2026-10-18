@@ -317,8 +317,14 @@
   }
 
   .buy {
+    flex-wrap: nowrap;
     margin-top: var(--space-12);
     padding-top: 0;
+  }
+
+  .add-btn {
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   .about {
