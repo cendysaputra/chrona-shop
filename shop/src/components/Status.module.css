@@ -3,10 +3,10 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 20px 24px;
-  border-radius: var(--radius-s);
-  font-size: var(--small);
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-sm);
 }
 
 .info {

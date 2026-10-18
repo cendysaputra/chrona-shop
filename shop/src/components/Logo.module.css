@@ -2,19 +2,19 @@
   display: inline-flex;
   align-items: baseline;
   text-decoration: none;
-  letter-spacing: 0.08em;
-  line-height: 1;
-  font-weight: 500;
+  letter-spacing: var(--tracking-wider);
+  line-height: var(--leading-none);
+  font-weight: var(--weight-medium);
   color: inherit;
 }
 
 .md {
-  font-size: 22px;
+  font-size: var(--text-3xl);
 }
 
 .xl {
-  font-size: clamp(64px, 12vw, 168px);
-  letter-spacing: 0.02em;
+  font-size: var(--display-logo);
+  letter-spacing: var(--tracking-loose);
 }
 
 .dot {

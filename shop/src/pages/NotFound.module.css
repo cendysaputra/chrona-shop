@@ -2,20 +2,27 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 20px;
+  gap: var(--space-5);
 }
 
 .code {
-  font-size: clamp(88px, 14vw, 180px);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.04em;
+  font-size: var(--display-code);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-none);
+  letter-spacing: var(--tracking-tighter);
   color: var(--accent);
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 8px;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+/* Responsive tracking */
+@media (max-width: 1024px) {
+  .code {
+    letter-spacing: var(--tracking-snug);
+  }
 }

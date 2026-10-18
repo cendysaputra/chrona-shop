@@ -9,14 +9,33 @@ import { CheckIcon } from "../components/Icons";
 import s from "./Checkout.module.css";
 
 const PAYMENTS = [
-  { value: "bank", label: "Bank transfer", note: "BCA, Mandiri, BNI, BRI" },
-  { value: "ewallet", label: "E-wallet", note: "GoPay, OVO, DANA, ShopeePay" },
+  {
+    value: "bank",
+    label: "Bank transfer",
+    logos: [
+      { name: "BCA", src: "/assets/bca.svg" },
+      { name: "Mandiri", src: "/assets/mandiri.svg" },
+      { name: "BNI", src: "/assets/bni.svg" },
+      { name: "BRI", src: "/assets/bri.svg" },
+    ],
+  },
+  {
+    value: "ewallet",
+    label: "E-wallet",
+    logos: [
+      { name: "GoPay", src: "/assets/gopay.svg" },
+      { name: "OVO", src: "/assets/ovo.svg" },
+      { name: "DANA", src: "/assets/dana.svg" },
+      { name: "ShopeePay", src: "/assets/shopeepay.svg" },
+    ],
+  },
   { value: "cod", label: "Cash on delivery", note: "Pay when your watch arrives" },
 ];
 
 const validate = (form) => {
   const errors = {};
   if (form.fullName.trim().length < 2) errors.fullName = "Enter the recipient's full name.";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) errors.email = "Enter a valid email address.";
   if (!/^(\+62|62|0)8\d{7,12}$/.test(form.phone.replace(/[\s-]/g, ""))) errors.phone = "Enter a valid Indonesian mobile number, e.g. 0812 3456 7890.";
   if (form.address.trim().length < 10) errors.address = "Enter the full street address.";
   if (!form.city.trim()) errors.city = "Enter the city.";
@@ -31,6 +50,7 @@ export default function Checkout() {
   const { items, subtotal, clearCart } = useCart();
   const [form, setForm] = useState({
     fullName: user?.name || "",
+    email: user?.email || "",
     phone: "",
     address: "",
     city: "",
@@ -61,16 +81,18 @@ export default function Checkout() {
 
   if (order) {
     return (
-      <div className={`page container ${s.done}`}>
+      <div className={`page container ${s.page} ${s.done}`}>
         <span className={s["done-icon"]} aria-hidden="true">
           <CheckIcon width={28} height={28} />
         </span>
-        <p className="eyebrow">Order {order.number}</p>
-        <h1 className="section-title">Almost yours.</h1>
-        <p className="lead">
-          Thank you, {order.name.split(" ")[0]}. Your order of <span className="mono">{formatPrice(order.total)}</span> has been placed and
-          will be shipped to {order.city}.
-        </p>
+        <div className={s["done-copy"]}>
+          <p className={s.eyebrow}>Order {order.number}</p>
+          <h1 className={s.title}>Almost yours<span>.</span></h1>
+          <p className={s.message}>
+            Thank you, {order.name.split(" ")[0]}. Your order of <strong>{formatPrice(order.total)}</strong> has been placed and
+            will be shipped to {order.city}.
+          </p>
+        </div>
         <Link to="/shop" className="btn btn-primary">
           Continue shopping
         </Link>
@@ -80,10 +102,12 @@ export default function Checkout() {
 
   if (items.length === 0) {
     return (
-      <div className={`page container ${s.done}`}>
-        <p className="eyebrow">Checkout</p>
-        <h1 className="section-title">Nothing to check out.</h1>
-        <p className="lead">Your cart is empty. Add a watch first.</p>
+      <div className={`page container ${s.page} ${s.done}`}>
+        <div className={s["done-copy"]}>
+          <p className={s.eyebrow}>Checkout</p>
+          <h1 className={s.title}>Nothing to check out<span>.</span></h1>
+          <p className={s.message}>Your cart is empty. Add a watch first.</p>
+        </div>
         <Link to="/shop" className="btn btn-primary">
           Shop watches
         </Link>
@@ -92,18 +116,19 @@ export default function Checkout() {
   }
 
   return (
-    <div className="page container">
+    <div className={`page container ${s.page}`}>
       <header className={s.head}>
-        <p className="eyebrow">Checkout</p>
-        <h1 className="section-title">Almost yours.</h1>
+        <p className={s.eyebrow}>Checkout</p>
+        <h1 className={s.title}>Almost yours<span>.</span></h1>
       </header>
 
       <form className={s.layout} onSubmit={onSubmit} noValidate>
         <div className={s.form}>
           <fieldset className={s.group}>
             <legend className={s.legend}>Shipping details</legend>
+            <Field id="fullName" label="Full name" value={form.fullName} onChange={onChange} error={errors.fullName} autoComplete="name" />
             <div className={s.row}>
-              <Field id="fullName" label="Full name" value={form.fullName} onChange={onChange} error={errors.fullName} autoComplete="name" />
+              <Field id="email" label="Email" type="email" value={form.email} onChange={onChange} error={errors.email} autoComplete="email" placeholder="you@example.com" />
               <Field id="phone" label="Phone number" type="tel" value={form.phone} onChange={onChange} error={errors.phone} autoComplete="tel" placeholder="0812 3456 7890" />
             </div>
             <Field id="address" as="textarea" label="Street address" value={form.address} onChange={onChange} error={errors.address} autoComplete="street-address" />
@@ -119,10 +144,19 @@ export default function Checkout() {
               {PAYMENTS.map((p) => (
                 <label key={p.value} className={`${s.payment} ${form.payment === p.value ? s["payment-active"] : ""}`}>
                   <input type="radio" name="payment" value={p.value} checked={form.payment === p.value} onChange={onChange} />
-                  <span>
+                  <span className={s["payment-text"]}>
                     <strong>{p.label}</strong>
-                    <small>{p.note}</small>
+                    {p.note && <small>{p.note}</small>}
                   </span>
+                  {p.logos && (
+                    <span className={s.logos}>
+                      {p.logos.map((logo) => (
+                        <span key={logo.name} className={s.logo} title={logo.name}>
+                          {logo.src ? <img src={logo.src} alt={logo.name} /> : <span className="visually-hidden">{logo.name}</span>}
+                        </span>
+                      ))}
+                    </span>
+                  )}
                 </label>
               ))}
             </div>
@@ -141,14 +175,14 @@ export default function Checkout() {
                   <span className={s["qty-badge"]}>{item.qty}</span>
                 </span>
                 <span className={s["item-name"]}>{item.name}</span>
-                <span className="mono">{formatPrice(item.price * item.qty)}</span>
+                <span className={s["item-price"]}>{formatPrice(item.price * item.qty)}</span>
               </li>
             ))}
           </ul>
           <dl className={s.rows}>
             <div>
               <dt>Subtotal</dt>
-              <dd className="mono">{formatPrice(subtotal)}</dd>
+              <dd>{formatPrice(subtotal)}</dd>
             </div>
             <div>
               <dt>Shipping</dt>
@@ -156,10 +190,10 @@ export default function Checkout() {
             </div>
             <div className={s.total}>
               <dt>Total</dt>
-              <dd className="mono">{formatPrice(subtotal)}</dd>
+              <dd>{formatPrice(subtotal)}</dd>
             </div>
           </dl>
-          <button type="submit" className="btn btn-primary btn-block">
+          <button type="submit" className={`btn btn-primary btn-block ${s.submit}`}>
             Place order
           </button>
           <Link to="/cart" className={`text-link ${s.back}`}>

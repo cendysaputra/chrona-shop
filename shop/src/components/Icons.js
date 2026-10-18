@@ -54,6 +54,28 @@ export const PlusIcon = (props) => (
   </svg>
 );
 
+export const TruckIcon = (props) => (
+  <svg {...base} {...props}>
+    <path d="M3 6h11v10H3zM14 10h4l3 3v3h-7" />
+    <circle cx="7" cy="18" r="2" />
+    <circle cx="17.5" cy="18" r="2" />
+  </svg>
+);
+
+export const ShieldIcon = (props) => (
+  <svg {...base} {...props}>
+    <path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z" />
+    <path d="M9 12l2 2 4-4" />
+  </svg>
+);
+
+export const ReturnIcon = (props) => (
+  <svg {...base} {...props}>
+    <path d="M9 14l-5-5 5-5" />
+    <path d="M4 9h10a6 6 0 0 1 0 12h-3" />
+  </svg>
+);
+
 export const CheckIcon = (props) => (
   <svg {...base} width={18} height={18} {...props}>
     <path d="M5 12.5l4.5 4.5L19 7" />

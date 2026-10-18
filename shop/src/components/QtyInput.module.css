@@ -1,8 +1,9 @@
 .qty {
   display: inline-flex;
   align-items: center;
-  border: 1.5px solid var(--gray-200);
+  border: 0;
   border-radius: var(--radius-pill);
+  background: #f3f3f3;
 }
 
 .qty button {
@@ -10,13 +11,13 @@
   align-items: center;
   justify-content: center;
   border: 0;
-  border-radius: 50%;
+  border-radius: var(--radius-full);
   background: none;
   color: var(--ink);
 }
 
 .qty button:hover:not(:disabled) {
-  background: var(--gray-50);
+  background: #e9e9e9;
 }
 
 .qty button:disabled {
@@ -25,22 +26,22 @@
 }
 
 .qty output {
-  min-width: 32px;
+  min-width: var(--space-8);
   text-align: center;
-  font-size: 15px;
+  font-size: var(--text-md);
 }
 
 .md button {
-  width: 46px;
-  height: 46px;
+  width: var(--control-xl);
+  height: var(--control-xl);
 }
 
 .sm button {
-  width: 36px;
-  height: 36px;
+  width: var(--control-xs);
+  height: var(--control-xs);
 }
 
 .sm output {
-  min-width: 24px;
-  font-size: var(--small);
+  min-width: var(--space-6);
+  font-size: var(--text-sm);
 }

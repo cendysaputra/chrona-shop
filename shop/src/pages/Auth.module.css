@@ -6,37 +6,37 @@
 .card {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--space-5);
   width: 100%;
-  max-width: 440px;
+  max-width: var(--form-width);
 }
 
 .title {
   font-size: var(--display-m);
-  font-weight: 700;
+  font-weight: var(--weight-bold);
 }
 
 .sub {
-  margin-top: -8px;
+  margin-top: calc(var(--space-2) * -1);
   color: var(--gray-600);
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  margin-top: 8px;
+  gap: var(--space-5);
+  margin-top: var(--space-2);
 }
 
 .form :global(.btn) {
-  margin-top: 8px;
-  min-height: 52px;
+  margin-top: var(--space-2);
+  min-height: var(--control-2xl);
 }
 
 .switch {
-  padding-top: 20px;
-  border-top: 1px solid var(--gray-100);
-  font-size: var(--small);
+  padding-top: var(--space-5);
+  border-top: var(--border-thin) solid var(--gray-100);
+  font-size: var(--text-sm);
   color: var(--gray-600);
 }
 
