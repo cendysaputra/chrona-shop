@@ -38,7 +38,7 @@ export default function Products() {
           <h1 id="shop-title">Made for every <span>moment.</span></h1>
           <p className={s["hero-description"]}>Find the watch that fits the way you move.</p>
         </div>
-        <img className={s["hero-watch"]} src="/assets/hero-img-shop.png" alt="" aria-hidden="true" />
+        <img className={s["hero-watch"]} src="/assets/hero-img-shop.webp" alt="" aria-hidden="true" />
       </section>
 
       <section className={`container ${s.catalog}`} aria-labelledby="catalog-title">

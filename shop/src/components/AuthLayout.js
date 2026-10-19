@@ -7,7 +7,7 @@ export default function AuthLayout({ children }) {
         <div className={s.clock}>
           <img src="/assets/pattern.svg" alt="" />
         </div>
-        <img className={s.watch} src="/assets/hero-img.png" alt="" />
+        <img className={s.watch} src="/assets/hero-img.webp" alt="" />
       </div>
 
       <div className={s.content}>{children}</div>

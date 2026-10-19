@@ -65,7 +65,7 @@ function Hero() {
           <span>One Glance Away</span>
         </h1>
       </div>
-      <img className={s["hero-watch"]} src="/assets/hero-img.png" alt="Silver Chrona smartwatch showing the time, heart rate, and activity" />
+      <img className={s["hero-watch"]} src="/assets/hero-img.webp" alt="Silver Chrona smartwatch showing the time, heart rate, and activity" />
     </section>
   );
 }
