@@ -3,10 +3,10 @@ import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { RefreshControl, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 
-import { getErrorMessage } from '@/api/axiosClient';
 import { getProduct, getProducts } from '@/api/productApi';
 import Button from '@/components/Button';
 import ClockPattern from '@/components/ClockPattern';
+import ErrorState from '@/components/ErrorState';
 import { HeroBackground, HeroFade } from '@/components/HeroGradient';
 import LazyScrollView from '@/components/LazyScrollView';
 import ProductGrid from '@/components/ProductGrid';
@@ -19,7 +19,7 @@ import type { Product } from '@/types';
 import { colors, fonts, radius, space, type } from '@/theme';
 import { formatPrice } from '@/utils/format';
 
-const heroWatch = require('@/assets/images/hero-img.png');
+const heroWatch = require('@/assets/images/hero-img.webp');
 const HERO_HEIGHT = 430;
 const TILE_HEIGHT = 480;
 
@@ -45,7 +45,7 @@ export default function HomeScreen() {
       <View style={styles.section}>
         <SectionTitle>New this season</SectionTitle>
         {featured.loading && <StatusView tone="loading" message="Loading featured watches…" />}
-        {!!featured.error && <StatusView tone="error" message={getErrorMessage(featured.error)} actionLabel="Try again" onAction={featured.reload} />}
+        {!!featured.error && <ErrorState error={featured.error} onRetry={featured.reload} />}
         {featured.data && (
           <View style={styles.tiles}>
             <FeatureTile product={featured.data[0]} label="Featured" />
@@ -63,7 +63,7 @@ export default function HomeScreen() {
           <Button title="Shop now" size="sm" onPress={() => router.navigate('/shop')} />
         </View>
         {collection.loading && <StatusView tone="loading" message="Loading watches…" />}
-        {!!collection.error && <StatusView tone="error" message={getErrorMessage(collection.error)} actionLabel="Try again" onAction={collection.reload} />}
+        {!!collection.error && <ErrorState error={collection.error} onRetry={collection.reload} />}
         {collection.data && <ProductGrid products={collection.data} />}
       </View>
     </LazyScrollView>

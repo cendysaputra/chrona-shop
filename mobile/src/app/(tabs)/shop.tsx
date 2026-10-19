@@ -2,8 +2,8 @@ import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import { FlatList, RefreshControl, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 
-import { getErrorMessage } from '@/api/axiosClient';
 import { getProducts } from '@/api/productApi';
+import ErrorState from '@/components/ErrorState';
 import { HeroBackground, HeroFade } from '@/components/HeroGradient';
 import ProductCard from '@/components/ProductCard';
 import SectionTitle from '@/components/SectionTitle';
@@ -14,7 +14,7 @@ import useAsync from '@/hooks/useAsync';
 import type { Product } from '@/types';
 import { colors, fonts, radius, space, type } from '@/theme';
 
-const shopWatch = require('@/assets/images/hero-img-shop.png');
+const shopWatch = require('@/assets/images/hero-img-shop.webp');
 const HERO_HEIGHT = 430;
 
 const FILTER_OPTIONS = [{ value: '', label: 'All series' }, ...SERIES.map((s) => ({ value: s, label: s }))];
@@ -48,7 +48,7 @@ export default function ShopScreen() {
         </View>
 
         {list.loading && <StatusView tone="loading" message="Loading watches…" />}
-        {!!list.error && <StatusView tone="error" message={getErrorMessage(list.error)} actionLabel="Try again" onAction={list.reload} />}
+        {!!list.error && <ErrorState error={list.error} onRetry={list.reload} />}
         {!list.loading && list.data?.length === 0 && (
           <StatusView message="No watches in this series yet." actionLabel="Show all watches" onAction={() => setFilters({ series: '' })} />
         )}

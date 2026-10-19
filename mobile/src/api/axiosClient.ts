@@ -19,12 +19,18 @@ axiosClient.interceptors.request.use(async (config) => {
 
 type ApiError = AxiosError<{ message?: string; errors?: { field: string; message: string }[] }>;
 
+// Tanpa respons
+export const isNetworkError = (err: unknown) => {
+  const e = err as ApiError;
+  return Boolean(e?.request && !e?.response);
+};
+
 // Readable error
 export const getErrorMessage = (err: unknown, fallback = 'Something went wrong. Please try again.') => {
   const e = err as ApiError;
   if (e?.response?.data?.message) return e.response.data.message;
-  if (e?.code === 'ECONNABORTED') return 'The server took too long to respond. Please try again.';
-  if (e?.request && !e?.response) return `Can't reach the server at ${API_URL}. Check your connection and the API address.`;
+  if (e?.code === 'ECONNABORTED') return 'This is taking longer than usual. Please try again.';
+  if (isNetworkError(err)) return "We couldn't connect. Check your internet connection and try again.";
   return fallback;
 };
 

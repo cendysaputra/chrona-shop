@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, ReactNode, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
-import { getStatus, TOKEN_KEY } from '@/api/axiosClient';
+import { getStatus, isNetworkError, TOKEN_KEY } from '@/api/axiosClient';
 import { getMe, loginRequest, registerRequest } from '@/api/userApi';
 import type { AuthResponse, User } from '@/types';
 
@@ -17,6 +17,11 @@ type AuthValue = {
 
 const AuthContext = createContext<AuthValue | null>(null);
 
+const USER_KEY = 'user';
+
+// Simpan profil
+const storeUser = (user: User) => AsyncStorage.setItem(USER_KEY, JSON.stringify(user)).catch(() => {});
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [checking, setChecking] = useState(true);
@@ -30,8 +35,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (!token) return;
         const me = await getMe();
         if (alive) setUser(me);
+        storeUser(me);
       } catch (err) {
-        if (getStatus(err) === 401) await AsyncStorage.removeItem(TOKEN_KEY);
+        if (getStatus(err) === 401) {
+          await AsyncStorage.multiRemove([TOKEN_KEY, USER_KEY]);
+        } else if (isNetworkError(err)) {
+          // Profil offline
+          const cached = await AsyncStorage.getItem(USER_KEY);
+          if (alive && cached) setUser(JSON.parse(cached));
+        }
       } finally {
         if (alive) setChecking(false);
       }
@@ -43,6 +55,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const saveSession = useCallback(async (data: AuthResponse) => {
     await AsyncStorage.setItem(TOKEN_KEY, data.token);
+    storeUser(data.user);
     setUser(data.user);
     return data.user;
   }, []);
@@ -58,14 +71,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 
   const logout = useCallback(async () => {
-    await AsyncStorage.removeItem(TOKEN_KEY);
+    await AsyncStorage.multiRemove([TOKEN_KEY, USER_KEY]);
     setUser(null);
   }, []);
 
   // Re-fetch profile
   const refresh = useCallback(async () => {
     try {
-      setUser(await getMe());
+      const me = await getMe();
+      setUser(me);
+      storeUser(me);
     } catch (err) {
       if (getStatus(err) === 401) await logout();
       else throw err;

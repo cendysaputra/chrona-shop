@@ -3,10 +3,11 @@ import { router, Stack, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { getErrorMessage, getStatus } from '@/api/axiosClient';
+import { getStatus } from '@/api/axiosClient';
 import { getProduct, getProducts } from '@/api/productApi';
 import Badge from '@/components/Badge';
 import Button from '@/components/Button';
+import ErrorState from '@/components/ErrorState';
 import LazyScrollView from '@/components/LazyScrollView';
 import ProductGrid from '@/components/ProductGrid';
 import ProductImage from '@/components/ProductImage';
@@ -38,12 +39,11 @@ export default function ProductDetailScreen() {
     const notFound = getStatus(error) === 404;
     return (
       <View style={styles.padded}>
-        <StatusView
-          tone={notFound ? 'info' : 'error'}
-          message={notFound ? "This watch isn't available." : getErrorMessage(error)}
-          actionLabel={notFound ? 'Back to shop' : 'Try again'}
-          onAction={notFound ? () => router.navigate('/shop') : reload}
-        />
+        {notFound ? (
+          <StatusView message="This watch isn't available." actionLabel="Back to shop" onAction={() => router.navigate('/shop')} />
+        ) : (
+          <ErrorState error={error} onRetry={reload} />
+        )}
       </View>
     );
   }

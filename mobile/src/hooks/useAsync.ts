@@ -1,4 +1,7 @@
+import { addNetworkStateListener } from 'expo-network';
 import { useCallback, useEffect, useRef, useState } from 'react';
+
+import { isNetworkError } from '@/api/axiosClient';
 
 type State<T> = { data: T | null; loading: boolean; error: unknown };
 
@@ -28,6 +31,15 @@ export default function useAsync<T>(fn: () => Promise<T>, key: string) {
   useEffect(() => {
     run();
   }, [key, run]);
+
+  // Ulang saat online
+  useEffect(() => {
+    if (!isNetworkError(state.error)) return;
+    const sub = addNetworkStateListener(({ isConnected, isInternetReachable }) => {
+      if (isConnected && isInternetReachable !== false) run();
+    });
+    return () => sub.remove();
+  }, [state.error, run]);
 
   return { ...state, refreshing, reload: () => run(false), refresh: () => run(true) };
 }

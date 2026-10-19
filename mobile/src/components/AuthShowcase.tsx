@@ -6,7 +6,7 @@ import { colors, radius, space } from '@/theme';
 import ClockPattern from './ClockPattern';
 import { HeroBackground, HeroFade } from './HeroGradient';
 
-const watch = require('@/assets/images/hero-img.png');
+const watch = require('@/assets/images/hero-img.webp');
 const PANEL_HEIGHT = 340;
 
 // Login banner
