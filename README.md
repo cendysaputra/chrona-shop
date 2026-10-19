@@ -1,17 +1,22 @@
 # Chrona
 
-REST API untuk marketplace smartwatch fiktif Chrona.
+Toko online smartwatch fiktif: REST API, web, dan aplikasi mobile.
 
 ![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=nodedotjs&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-4-000000?logo=express&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose_8-47A248?logo=mongodb&logoColor=white)
-![JWT](https://img.shields.io/badge/Auth-JWT-000000?logo=jsonwebtokens&logoColor=white)
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
+![Expo](https://img.shields.io/badge/Expo-React_Native-000020?logo=expo&logoColor=white)
 
-</div>
+## Isi Repo
 
----
+| Folder | Isi | Stack |
+|---|---|---|
+| `server/` | REST API | Express, MongoDB, JWT |
+| `shop/` | Web toko | React 18, React Router |
+| `mobile/` | Aplikasi Android/iOS | Expo, Expo Router, TypeScript |
 
-Berisi data 20 smartwatch dalam enam seri, akun pengguna dengan login JWT, dan hak akses admin untuk mengelola produk. Frontend belum ada.
+Fitur: katalog 20 produk, filter & sort, detail produk, keranjang, checkout (simulasi), login/register, dan halaman akun.
 
 ## Katalog
 
@@ -30,56 +35,71 @@ Berisi data 20 smartwatch dalam enam seri, akun pengguna dengan login JWT, dan h
 
 ## Menjalankan
 
-Butuh Node.js 18+ dan MongoDB (lokal di port 27017 atau Atlas).
+Butuh Node.js 18+ dan MongoDB (lokal atau Atlas).
+
+**1. Server** → `http://localhost:5050`
 
 ```bash
 cd server
 npm install
-cp .env.example .env   # lalu isi JWT_SECRET dan akun admin
-npm run seed           # isi 20 produk + akun admin
+cp .env.example .env   # isi JWT_SECRET dan akun admin
+npm run seed           # isi produk + akun admin
 npm run dev
 ```
 
-API berjalan di `http://localhost:5050`.
-
-> [!NOTE]
-> Port 5050 dipakai karena port 5000 sering diblokir Windows (`EACCES`).
-
-`JWT_SECRET` wajib diisi, bisa dibuat dengan:
+Buat `JWT_SECRET` acak:
 
 ```bash
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ```
 
-## Endpoint
+**2. Web** → `http://localhost:3000`
 
-**Produk**
+```bash
+cd shop
+npm install
+cp .env.example .env   # REACT_APP_API_URL
+npm start
+```
+
+**3. Mobile**
+
+```bash
+cd mobile
+npm install
+cp .env.example .env   # EXPO_PUBLIC_API_URL = IP lokal komputer
+npm start
+```
+
+> [!NOTE]
+> Di HP, pakai IP lokal (misal `192.168.1.10:5050`), bukan `localhost`.
+
+## Endpoint
 
 | Method | Path | Akses |
 |---|---|---|
 | `GET` | `/api/products` | publik |
 | `GET` | `/api/products/:key` | publik |
 | `POST` | `/api/products` | admin |
-| `PUT` | `/api/products/:key` | admin |
-| `DELETE` | `/api/products/:key` | admin |
-
-**Pengguna**
-
-| Method | Path | Akses |
-|---|---|---|
+| `PUT` `DELETE` | `/api/products/:key` | admin |
 | `POST` | `/api/users/register` | publik |
 | `POST` | `/api/users/login` | publik |
 | `GET` | `/api/users/me` | login |
 | `GET` | `/api/users` | admin |
-| `GET` | `/api/users/:id` | admin / pemilik |
-| `PUT` | `/api/users/:id` | admin / pemilik |
+| `GET` `PUT` | `/api/users/:id` | admin / pemilik |
 | `DELETE` | `/api/users/:id` | admin |
 
-- `:key` bisa berupa nomor produk (`3`), slug (`chrona-pulse-45-graphite`), atau `_id`.
-- Filter daftar produk: `tag`, `series`, `sort` (`newest`, `price-asc`, `price-desc`, `best-selling`), `limit`.
-- Token dikirim lewat header `Authorization: Bearer <token>`.
-- Gambar produk tersedia di `/images/products/<slug>.webp`.
+- `:key` bisa nomor produk, slug, atau `_id`.
+- Filter produk: `tag`, `series`, `sort` (`newest`, `price-asc`, `price-desc`, `best-selling`), `limit`.
+- Token: header `Authorization: Bearer <token>`.
+- Gambar: `/images/products/<slug>.webp`.
+
+## Deploy
+
+- API: Railway
+- Web: Vercel (`shop/vercel.json`)
+- Mobile: EAS Build (`mobile/eas.json`)
 
 ---
 
-<sub>Chrona adalah merek fiktif. Nama produk, harga, dan spesifikasi dibuat sendiri untuk keperluan latihan.</sub>
+Chrona adalah merek fiktif. Nama produk, harga, dan spesifikasi dibuat sendiri untuk latihan.
